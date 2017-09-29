@@ -102,8 +102,8 @@ class CircleChanger(object):
         # the SPECIFICATION of the method.  That is why you read the
         # TEST function before implementing the method that it tests.
         ################################################################
-        center = rg.Point(x, y)
-        self.circle = rg.Circle(center, radius)
+        self.center = rg.Point(x, y)
+        self.circle = rg.Circle(self.center, radius)
         self.colors = colors
         self.circle.fill_color = fill_color
     def __repr__(self):
@@ -205,8 +205,7 @@ class CircleChanger(object):
         #   of the    rg.Point     class to compute this distance.
         #   NO CREDIT if you use the distance formula here.
         ################################################################
-        distance = point.get_distance_from(self.circle.center)
-        return distance
+        return self.circle.center.get_distance_from(point)
     def swell_or_shrink_once(self, amount_to_swell_or_shrink):
         """
         What comes in:
@@ -365,8 +364,20 @@ class CircleChanger(object):
             :type other_circle_changer: CircleChanger
             :rtype CircleChanger
         """
+        centerpoint = self.circle.center.halfway_to(other_circle_changer.circle.center)
+        radius = (self.circle.center.get_distance_from(other_circle_changer.center) / 2)
+        newcircle = CircleChanger(centerpoint.x, centerpoint.y, radius, 'red', self.colors + other_circle_changer.colors)
+        return newcircle
+        # center_x = (self.circle.center.x + (self.get_distance_from(other_circle_changer.circle.center.x) / 2))
+        # center_y = (self.circle.center.y + (self.get_distance_from(other_circle_changer.circle.center.x) / 2))
+        # newcenter = rg.Point(center_x, center_y)
+        # newradius = (self.get_distance_from(other_circle_changer)/2)
+        # newcircle = CircleChanger(center_x, center_y, newradius, 'red', self.colors + other_circle_changer.colors)
+        # newcircle.fill_color = 'red'
+        # other_circle_changer.colors = other_circle_changer.colors + self.colors
+        # return newcircle
         ################################################################
-        # TODO: 6.
+        # DONE: 6.
         #   First, READ the doc-string (specification) above.
         #   Second, READ the   run_test_swallow   function (below).
         #   Third, implement and test this method.
