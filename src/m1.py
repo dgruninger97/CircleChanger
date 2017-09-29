@@ -407,8 +407,9 @@ class CircleChanger(object):
         Type hints:
             :type index_of_color: int
         """
+        self.circle.fill_color = self.colors[index_of_color]
         ################################################################
-        # TODO: 7.
+        # DONE: 7.
         #   First, READ the doc-string (specification) above.
         #   Second, READ the   run_test_change_color   function (below).
         #   Third, implement and test this method.
